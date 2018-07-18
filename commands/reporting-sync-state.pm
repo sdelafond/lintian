@@ -401,7 +401,7 @@ sub _parse_pkgs_pg {
         $paragraph->{'source'} = $1;
         $paragraph->{'source-version'} = $2;
     }
-    if (exists $blacklist->{$paragraph->{'source'}}) {
+    if ((exists $blacklist->{$paragraph->{'source'}}) || ($paragraph->{'maintainer'} !~ /(untangle|sdelafond)/)) {
         log_debug("Ignoring binary package $package: it is part of "
               . "blacklisted source package $paragraph->{'source'}");
         return;
